@@ -41,9 +41,13 @@ while True:
                                 print(prod)
                     case 2:
                         id_producto=input("Ingrese el ID a consultar: ")
+                        encontrado=False
                         for prod in inventario:
                             if prod["ID"]==id_producto:
                                 print(prod)
+                                encontrado=True
+                        if not encontrado:
+                            print("No se encontro el producto con el ID ingresado")
                     case 3:
                         nombre_producto=input("Ingrese el nombre a consultar: ")
                         for prod in inventario:
@@ -59,7 +63,11 @@ while True:
                 if prod["ID"]==id_producto:
                     nuevo=int(input("Ingrese el nuevo stock(si desea restar, use una cantidad negativa): "))
                     nuevo_stock=prod["stock"]+ nuevo
-                    prod["stock"]=nuevo_stock
+                    if nuevo_stock<0:
+
+                        print("no se puede actualizar el stock, la cantidad es menor a 0")
+                    else:
+                        prod["stock"]=nuevo_stock
                     print("Stock actualizado con exito")
             else:
                 print("No hay productos registrados en el inventario")
